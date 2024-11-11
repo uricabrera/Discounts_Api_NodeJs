@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const discountRoutes = require('./routes/discountRoutes');
 const Discount = require('./models/discountModel'); 
-const sequelize = require('./config/database'); 
+const sequelize = require('./config/database');
+require('dotenv').config();
 
 // Create an instance of the Express application
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 // Define routes for the discount API
 app.use('/api', discountRoutes);
 
-const PORT = 3000; // Define the port for the server
+const PORT = process.env.PORT || 3000; // Define the port for the server
 
 // Synchronize models with the database and then start the server
 sequelize.sync({ alter: true }) 
